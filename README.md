@@ -53,26 +53,26 @@ Test: One-way ANOVA
 
 ##  Code Snapshot (R)
 
-# Load data and filter
-data4 <- read.xlsx("Chilli.xlsx", sheet = "Data Sheet")
-data_filtered <- data4[95:123, ]
+Load data and filter  
+data4 <- read.xlsx("Chilli.xlsx", sheet = "Data Sheet")  
+data_filtered <- data4[95:123, ]  
 
-# Hypothesis test for Leaf Curl disease access
-t.test(data_filtered$D6, mu = 60, alternative = "greater")
+Hypothesis test for Leaf Curl disease access  
+t.test(data_filtered$D6, mu = 60, alternative = "greater")  
 
-# Proportion test
-data4$sum_of_diseases <- rowSums(data4[, 5:15])
-prop.test(sum(data4$D6), sum(data4$sum_of_diseases), p = 0.15, alternative = "greater", correct = FALSE)
+Proportion test  
+data4$sum_of_diseases <- rowSums(data4[, 5:15])  
+prop.test(sum(data4$D6), sum(data4$sum_of_diseases), p = 0.15, alternative = "greater", correct = FALSE)  
 
-# Growth analysis
-first_period <- data4[1:73, ]
-second_period <- data4[74:123, ]
-t.test(second_period$No.of.users, first_period$No.of.users, alternative = "greater", var.equal = FALSE)
+Growth analysis  
+first_period <- data4[1:73, ]  
+second_period <- data4[74:123, ]  
+t.test(second_period$No.of.users, first_period$No.of.users, alternative = "greater", var.equal = FALSE)  
 
-# ANOVA on weekly usage
-data_filtered2 <- data4[26:123, ]
-anova_result <- aov(Usage ~ Week, data = data_filtered2)
-summary(anova_result)
+ANOVA on weekly usage  
+data_filtered2 <- data4[26:123, ]  
+anova_result <- aov(Usage ~ Week, data = data_filtered2)  
+summary(anova_result)  
 
 
 ## Use Case 
