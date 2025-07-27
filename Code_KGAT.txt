@@ -1,0 +1,30 @@
+data4<-read.xlsx("Chilli.xlsx",sheet="Data Sheet")
+head(data4)
+data4[1]
+data_filtered<- data4[95:123,]
+head(data_filtered)
+t.test(data_filtered$D6,mu=60,alternative="greater")
+#t.test(data_filtered$D6, mu = 60, alternative = "two.sided")
+#t.test(data_filtered$D6, mu = 60, alternative = "less")
+
+data4$sum_of_diseases<- rowSums(data4[,5:15])
+head(data4$sum_of_diseases)
+#data_filtered$disease_total <- rowSums(data_filtered[, c("D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11")])
+total_D6<-sum(data4$D6)
+total_all<-sum(data4$sum_of_diseases)
+print(paste("Total D6:",total_D6))
+print(paste("Total All:",total_all))
+prop_test<-prop.test(total_D6,total_all,p=0.15,alternative="greater",correct=FALSE)
+prop_test
+#users_2015_16 <- subset(data, Month-Year %in% c("Apr-2015", "May-2015", "Jun-2015", "Jul-2015", "Aug-2015",
+#"Sep-2015", "Oct-2015", "Nov-2015", "Dec-2015",
+#"Jan-2016", "Feb-2016", "Mar-2016"))
+
+first_period<- data4[1:73,]
+second_period<- data4[74:123,]
+t.test(second_period$No.of.users,first_period$No.of.users,alternative="greater",var.equal=FALSE)
+
+data_filtered2<- data4[26:123,]
+table(data_filtered2$Week)
+anova_result<-aov(Usage ~ Week,data=data_filtered2)
+summary(anova_result)
